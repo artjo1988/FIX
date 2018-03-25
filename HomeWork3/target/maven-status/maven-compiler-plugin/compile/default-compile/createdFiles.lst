@@ -1,0 +1,5 @@
+ru\ivmiit\model\User.class
+ru\ivmiit\repository\DataBaseImplRep.class
+ru\ivmiit\repository\Repository.class
+ru\ivmiit\servlets\LoginServlet.class
+ru\ivmiit\servlets\HomeServlet.class
