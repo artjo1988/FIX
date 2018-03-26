@@ -1,5 +1,6 @@
 package ru.ivmiit.servlets;
 
+import org.mindrot.jbcrypt.BCrypt;
 import ru.ivmiit.repository.DataBaseImplRep;
 
 import javax.servlet.ServletException;
@@ -24,12 +25,13 @@ public class LoginServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
+//        String city = "";
         if(new DataBaseImplRep().isExist(name, password)){
             HttpSession session = req.getSession();
             session.setAttribute("user",name);
-            String city = req.getParameter("city");
-            Cookie cookieCity = new Cookie("city", city);
-            resp.addCookie(cookieCity);
+//            city = new DataBaseImplRep().getUser(name).getCity();
+//            Cookie cookieCity = new Cookie("city", city);
+//            resp.addCookie(cookieCity);
             resp.sendRedirect(req.getContextPath() + "/home");
         }
         else{

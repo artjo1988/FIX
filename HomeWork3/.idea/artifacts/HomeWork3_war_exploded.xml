@@ -9,6 +9,7 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: org.postgresql:postgresql:42.1.4" />
+          <element id="library" level="project" name="Maven: org.mindrot:jbcrypt:0.3m" />
         </element>
       </element>
       <element id="directory" name="META-INF">

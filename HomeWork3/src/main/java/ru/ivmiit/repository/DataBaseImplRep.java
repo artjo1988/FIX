@@ -1,5 +1,6 @@
 package ru.ivmiit.repository;
 
+import org.mindrot.jbcrypt.BCrypt;
 import ru.ivmiit.model.User;
 
 import java.sql.*;
@@ -17,6 +18,7 @@ public class DataBaseImplRep implements Repository {
     static private Connection connection;
     static private Statement statement;
     private List<User> users;
+    private User user;
 
     static{
          try {
@@ -66,7 +68,7 @@ public class DataBaseImplRep implements Repository {
     @Override
     public boolean isExist (String name, String password) {
         for(User user : findAll()) {
-            if (user.getName().equals(name) && user.getPassword().equals(password)) {
+            if (user.getName().equals(name) && BCrypt.checkpw(password, user.getPassword())) {
                 return true;
             }
         }
@@ -75,15 +77,23 @@ public class DataBaseImplRep implements Repository {
 
 
     @Override
-    public User getUser (String nameUs) {
-        ResultSet resultSet = null;
-        User user = null;
+    public User getUser (String name) {
         try {
-            resultSet = statement.executeQuery("SELECT * FROM fix_user WHERE name = '" + nameUs + "'");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM fix_user WHERE name = '" + name + "'");
             user = new User(resultSet.getString("name"), resultSet.getString("password"),
                     LocalDate.parse(resultSet.getString("birthday")), resultSet.getString("city"));
         }
         catch(Exception e){}
         return user;
+    }
+
+    @Override
+    public boolean isExistName(String name) {
+        for(User user : findAll()) {
+            if (user.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

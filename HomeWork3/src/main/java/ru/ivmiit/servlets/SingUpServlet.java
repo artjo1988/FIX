@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  * Created by Макс on 24.03.2018.
@@ -32,13 +33,15 @@ public class SingUpServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
+        String hashPassword =  BCrypt.hashpw(password, BCrypt.gensalt());
         LocalDate birthDay = LocalDate.parse(req.getParameter("birthDay"));
         String city = req.getParameter("city");
-        if (new DataBaseImplRep().isExist(name, password)) doGet(req, resp);
+        if (new DataBaseImplRep().isExist(name, password) || new DataBaseImplRep().isExistName(name)) doGet(req, resp);
         else {
-            User user = new User(name, password, birthDay,city);
+            User user = new User(name, hashPassword, birthDay,city);
             new DataBaseImplRep().save(user);
             req.getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(req, resp);
         }
     }
+
 }

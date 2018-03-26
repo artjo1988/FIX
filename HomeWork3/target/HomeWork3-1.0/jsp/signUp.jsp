@@ -16,7 +16,7 @@
 <body>
 <div class="form-style-2">
     <div class="form-style-2-heading">
-        Please Sign Up!
+        <h1> Please Sign Up! </h1>
     </div>
     <form method="post" action="/signUp">
         <label for="name"> User name
@@ -37,7 +37,7 @@
 
 <div class="form-style-2">
     <div class="form-style-2-heading">
-        Already registered!
+        <h2> Already registered! </h2>
     </div>
     <table>
         <tr>

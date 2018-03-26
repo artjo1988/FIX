@@ -2,6 +2,7 @@ package ru.ivmiit.repository;
 
 import ru.ivmiit.model.User;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface Repository {
     void save(User user);
     boolean isExist(String name, String password);
     User getUser(String name);
+    boolean isExistName(String name);
 }
