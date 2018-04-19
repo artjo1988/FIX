@@ -80,7 +80,7 @@ public class DataBaseImplRep implements Repository {
     public User getUser (String name) {
         try {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM fix_user WHERE name = '" + name + "'");
-            user = new User(resultSet.getString("name"), resultSet.getString("password"),
+            while(resultSet.next())user = new User(resultSet.getString("name"), resultSet.getString("password"),
                     LocalDate.parse(resultSet.getString("birthday")), resultSet.getString("city"));
         }
         catch(Exception e){}

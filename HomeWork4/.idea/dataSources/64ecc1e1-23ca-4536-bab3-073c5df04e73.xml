@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="fix_users@localhost">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.1">
+    <root id="1"/>
+    <database id="2" parent="1" name="fix_users">
+      <ObjectId>16394</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <schema id="3" parent="2" name="public">
+      <ObjectId>2200</ObjectId>
+      <IntrospectionTimestamp>2018-04-16.14:16:01.285</IntrospectionTimestamp>
+      <IntrospectionStateNumber>564</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="4" parent="2" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+    </schema>
+    <schema id="5" parent="2" name="pg_toast">
+      <ObjectId>99</ObjectId>
+    </schema>
+    <schema id="6" parent="2" name="pg_temp_1">
+      <ObjectId>11736</ObjectId>
+    </schema>
+    <schema id="7" parent="2" name="pg_toast_temp_1">
+      <ObjectId>11737</ObjectId>
+    </schema>
+    <schema id="8" parent="2" name="information_schema">
+      <ObjectId>12648</ObjectId>
+    </schema>
+    <sequence id="9" parent="3" name="fix_user_id_seq">
+      <ObjectId>16407</ObjectId>
+      <StateNumber>564</StateNumber>
+      <BelongsToColumn>1</BelongsToColumn>
+    </sequence>
+    <table id="10" parent="3" name="fix_user">
+      <ObjectId>16409</ObjectId>
+      <StateNumber>564</StateNumber>
+    </table>
+    <column id="11" parent="10" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>564</StateNumber>
+      <SequenceName>fix_user_id_seq</SequenceName>
+      <DefaultExpression>nextval(&apos;fix_user_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="12" parent="10" name="name">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+      <StateNumber>564</StateNumber>
+    </column>
+    <column id="13" parent="10" name="password">
+      <Position>3</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>564</StateNumber>
+    </column>
+    <column id="14" parent="10" name="birthday">
+      <Position>4</Position>
+      <DataType>varchar(50)|0</DataType>
+      <StateNumber>564</StateNumber>
+    </column>
+    <column id="15" parent="10" name="city">
+      <Position>5</Position>
+      <DataType>varchar(50)|0</DataType>
+      <StateNumber>564</StateNumber>
+    </column>
+    <index id="16" parent="10" name="fix_user_pkey">
+      <ObjectId>16413</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="17" parent="10" name="fix_user_pkey">
+      <ObjectId>16414</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>fix_user_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

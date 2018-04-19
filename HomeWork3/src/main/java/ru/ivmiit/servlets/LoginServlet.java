@@ -25,13 +25,13 @@ public class LoginServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-//        String city = "";
+        String city = "";
         if(new DataBaseImplRep().isExist(name, password)){
             HttpSession session = req.getSession();
             session.setAttribute("user",name);
-//            city = new DataBaseImplRep().getUser(name).getCity();
-//            Cookie cookieCity = new Cookie("city", city);
-//            resp.addCookie(cookieCity);
+            city = new DataBaseImplRep().getUser(name).getCity();
+            Cookie cookieCity = new Cookie("city", city);
+            resp.addCookie(cookieCity);
             resp.sendRedirect(req.getContextPath() + "/home");
         }
         else{
