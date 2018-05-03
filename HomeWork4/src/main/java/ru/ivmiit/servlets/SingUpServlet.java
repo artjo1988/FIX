@@ -1,7 +1,7 @@
 package ru.ivmiit.servlets;
 
 import org.mindrot.jbcrypt.BCrypt;
-import ru.ivmiit.model.User;
+import ru.ivmiit.models.User;
 import ru.ivmiit.repository.DataBaseImplRep;
 
 import javax.servlet.RequestDispatcher;

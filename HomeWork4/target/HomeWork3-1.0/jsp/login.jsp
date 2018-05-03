@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <html>
-                     <head>
+<head>
                          <title>Title</title>
                          <link href="/css/style.css" rel="stylesheet" type="text/css">
                      </head>
@@ -24,7 +24,7 @@
                              <label for="password">Password
                                  <input class="input-field" type="password" id="password" name="password">
                              </label>
-                             <input type="submit" value="Sign Up">
+                             <input type="submit" value="Log in">
                          </form>
                      </div>
                      </body>

@@ -1,6 +1,7 @@
 package ru.ivmiit.DAO;
 
-import ru.ivmiit.model.User;
+import org.mindrot.jbcrypt.BCrypt;
+import ru.ivmiit.models.User;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -10,15 +11,14 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Макс on 16.04.2018.
  */
-public class UsersDaoJdbcImpl implements UsersDAO {
+public class UsersDaoJdbcImpl implements UsersDao {
 
     //language=SQL
-    private final String SQL_SELECT_All = "SELECT name, birthday, city FROM fix_user ";
+    private final String SQL_SELECT_All = "SELECT name, password, birthday, city FROM fix_user";
 
     //language=SQL
     private final String SQL_SELECT_BY_NAME = "SELECT name, birthday, city FROM fix_user WHERE name = ?";
@@ -27,7 +27,8 @@ public class UsersDaoJdbcImpl implements UsersDAO {
     private final String SQL_SELECT_BY_CITY = "SELECT name, birthday, city FROM fix_user WHERE city = ?";
 
     //language=SQL
-    private final String SQL_SAVE_USER = "INSERT INTO fix_user (name, password, birthday, city) VALUES (?, ?, ?,)";
+
+    private final String SQL_SAVE_USER = "INSERT INTO fix_user (name, password, birthday, city) VALUES (?, ?, ?, ?)";
 
     //language=SQL
     private final String SQL_DELETE_BY_NAME = "DELETE FROM fix_user WHERE name = ?";
@@ -46,7 +47,7 @@ public class UsersDaoJdbcImpl implements UsersDAO {
     }
 
     @Override
-    public Optional<User> find(String name){
+    public User find(String name){
         try{
             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_BY_NAME);
             statement.setString(1, name);
@@ -55,9 +56,9 @@ public class UsersDaoJdbcImpl implements UsersDAO {
                 String nameResSet = resultSet.getString("name");
                 String birthdayResSet = resultSet.getString("birthday");
                 String cityResSet = resultSet.getString("city");
-                return Optional.of(new User(nameResSet, LocalDate.parse(birthdayResSet), cityResSet));
+                return new User(nameResSet, LocalDate.parse(birthdayResSet), cityResSet);
             }
-            return Optional.empty();
+            return null;
         } catch(SQLException e){
             throw new IllegalStateException(e);
         }
@@ -68,6 +69,7 @@ public class UsersDaoJdbcImpl implements UsersDAO {
         try{
             List<User> list = new ArrayList<>();
             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_BY_CITY);
+            statement.setString(1, city);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 String nameResSet = resultSet.getString("name");
@@ -82,7 +84,7 @@ public class UsersDaoJdbcImpl implements UsersDAO {
     }
 
     @Override
-    public void save(User model) {
+    public void create(User model) {
         try{
             String name = model.getName();
             String hashPassword = model.getPassword();
@@ -139,6 +141,7 @@ public class UsersDaoJdbcImpl implements UsersDAO {
             ResultSet resultSet = statment.executeQuery();
             while(resultSet.next()){
                 String nameResSet = resultSet.getString("name");
+                String hashNameResEt = resultSet.getString("password");
                 String birthdayResSet = resultSet.getString("birthday");
                 String cityResSet = resultSet.getString("city");
                 list.add(new User(nameResSet, LocalDate.parse(birthdayResSet), cityResSet));
@@ -147,7 +150,32 @@ public class UsersDaoJdbcImpl implements UsersDAO {
         } catch(SQLException e){
             throw new IllegalStateException(e);
         }
+    }
 
+    @Override
+    public boolean isExist(String name, String password) {
+        for(User user : findAll()){
+            if(user.getName().equals(name) && BCrypt.checkpw(password, user.getPassword()))
+                return true;
+        }
+        return false;
+    }
 
+    @Override
+    public boolean isExistName(String name) {
+        for(User user : findAll()) {
+            if (user.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isExistCity(String city) {
+        for (User user : findAll()) {
+            if (user.getCity().equals(city)) return true;
+        }
+        return false;
     }
 }

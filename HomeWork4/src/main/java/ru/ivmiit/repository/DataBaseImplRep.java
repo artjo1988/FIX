@@ -1,7 +1,7 @@
 package ru.ivmiit.repository;
 
 import org.mindrot.jbcrypt.BCrypt;
-import ru.ivmiit.model.User;
+import ru.ivmiit.models.User;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,6 +1,6 @@
 package ru.ivmiit.repository;
 
-import ru.ivmiit.model.User;
+import ru.ivmiit.models.User;
 
 import java.util.List;
 

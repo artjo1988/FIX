@@ -7,12 +7,6 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="fix_users_db@localhost" uuid="e58651d8-2cb5-4654-98eb-66296d535a46">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/fix_users_db</jdbc-url>
-    </data-source>
     <data-source source="LOCAL" name="fix_users@localhost" uuid="64ecc1e1-23ca-4536-bab3-073c5df04e73">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
